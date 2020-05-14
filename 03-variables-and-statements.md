@@ -57,3 +57,5 @@ Semicolons used to end a statement. You can choose to not write them _(because t
         -   _Camel-case:_ `let iLovePizza = true;`
         -   _Upper Camel case (in case of classes):_ `ILovePizza`
         -   _Snake case: `let i_love_pizza=true;`_
+    - Cannot use 'kebab case' because dashes are not allowed in variables:
+        -   _Kebab case: `let i-need-money'=true;`_
