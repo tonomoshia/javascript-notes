@@ -45,4 +45,5 @@
     `const myTotal = calculateBill();` (myTotal will have value 112.999999999)
     
 -   You can also include the function in your interpolated string:
+
     ```console.log(`Your bill is $${calculateBill()}.`)```
