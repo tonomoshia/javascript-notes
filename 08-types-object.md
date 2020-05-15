@@ -24,5 +24,7 @@
 .
 
 -   Order of properties doesn't matter in an object.
+    - If order matters to you, used an **array**.
+    
 -   **Accessing properties:**
     -   `person.name // Soumya` (dot notation)
