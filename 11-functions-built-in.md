@@ -43,7 +43,7 @@
             
         -   Mobile only functions e.g. `navigator.vibrate()`
             
--   In case of doubts, always refer MDN Docs.
+-   In case of doubts, always refer Mozilla Developer Network Docs. (search for the function and include MDN in your search parameters. Ex. search for `navigate.vibrate() MDN`.
     
 -   Other Examples:
     
