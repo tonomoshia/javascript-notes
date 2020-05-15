@@ -1,7 +1,7 @@
 
 ## Number
 
-Only **one** type of number in JavaScript whether it has decimal point or not.
+Only **one** type of number in JavaScript whether it has decimal point or not. (Meaning **number** encompasses both integers (whole numbers) and floats (numbers with decimals).)
 
 ```javascript
 const age = 100;
