@@ -2,6 +2,7 @@
 
 **SNOBUS'N**
 
+( I like _SNOB N' US_ better. Easier to remember.
 1. String
 2. Number
 3. Object
