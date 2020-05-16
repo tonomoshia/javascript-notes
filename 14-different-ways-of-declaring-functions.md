@@ -62,8 +62,19 @@
  ```javascript
     const inchToCM = inches => inches * 2.54;
   ```
+  - Explicitly returning an object:
+  ```javascript
+  function makeABaby(first, last) {
+  const baby = {
+    name: `${first} ${last}`,
+    age: 0
+  }
+  return baby;
+}
+```
 
-  - Implicitly returning an object:
+
+- Implicitly returning an object:
 
     ```javascript
     const makeABaby = (first, last) => ({ name: `${first} ${last}`, age: 0 });
