@@ -47,11 +47,21 @@
     const inchToCM = inches => {
       return inches * 2.54;
     };
+    
+    function add(a, b =3) {
+	const total = a + b;
+	return total;
+	}```
 
-    // Implicit return: const add = (a, b = 3) => a + b; const inchToCM = (inches) => inches * 2.54;
+   Implicit return: 
+   ```javascript
+    const add = (a, b = 3) => a + b; 
+    const inchToCM = (inches) => inches * 2.54;```
 
-    // In case of only 1 parameter, we can omit the () around it const inchToCM = inches => inches * 2.54;
-    ```
+ In case of only 1 parameter, we can omit the () around it 
+ ```javascript
+    const inchToCM = inches => inches * 2.54;
+  ```
 
   - Implicitly returning an object:
 
