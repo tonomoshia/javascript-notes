@@ -47,8 +47,214 @@ If you need a variable to be available outside of a block, declare the above the
 Lexical Scoping -> scope lookup happens where functions are _defined_, not where they're run.
 
 --
-- [ ] TODO: Add some information from [Soumya's Notion Notes][3] on Scope before finalizing notes.
+- [x] TODO: Add some information from [Soumya's Notion Notes][3] on Scope before finalizing notes.
 
+# Soumya's Hoisting Notes
+
+## Scope
+
+Scope answers the question: *"Where are my variables and functions available to me?".*
+
+- **Global Variables**
+
+    Available anywhere. They are created not inside a function, module, if statement etc.
+
+    `<script> const first = 'Soumya'; </script> //here first is a global variable.`
+
+    In the browser, the global scope is called *window.* Methods like `setTimeout, setInterval` are available on the *window* object.
+
+    ```jsx
+    const first = 'wes';
+    let second = 'bos';
+    var third = 100;
+
+    console.log(window.first); // undefined
+    console.log(window.second); // undefined
+    console.log(window.third); // 100
+    ```
+
+    The above occurs because `var` variables are attached to the window object and are globally scoped, whereas `const` and `let` variables are globally scoped but not attached to the window object.
+
+    Anything except `let` and `const` declared things which are globally declared are attached to window object.
+
+    ```jsx
+    function sayHi() {
+    	console.log('HI');
+    }
+
+    sayHi(); // HI
+    window.sayHi(); // HI
+    ```
+
+    Using global scoped variables etc. are not advised in general.
+
+    More examples:
+
+    ```jsx
+    const age = 100;
+    function go() {
+    	const cool = true;
+    }
+    go();
+
+    console.log(age); // 100
+    console.log(cool); // Uncaught ReferenceError: cool is not defined
+    ```
+
+    Above, `cool` is function-scoped. Function scoping means anything declared inside of a function is only accessible inside the function and not outside (unless we return it from the function and store the returned value in a variable when the function is run)
+
+    **Scope Lookup:** If variables are not found inside a function, it goes a level higher to look for the variable in that scope and if its not available in that scope as well, it goes another level higher.
+
+    ```jsx
+    const age = 100;
+    function go() {
+    	const cool = true;
+    	console.log(age); 
+    	console.log(cool); 
+    }
+    go();
+
+    // console output:
+    // 100 - this is printed as it doesn't find variable age in go function scope it goes a level higher to find it
+    // true
+    ```
+
+    ```jsx
+    const age = 100;
+    function go() {
+    	const cool = true;
+    	const age = 200; // global variable age has been shadowed by this variable - shadow variable
+    	console.log(age); 
+    	console.log(cool); 
+    	}
+    go();
+
+    // console output:
+    // 200 - this is printed because it finds variable age in go function scope only
+    // true
+    ```
+
+    **Block Scope:**
+
+    ```jsx
+    if(1 === 1){
+    	const cool = true; // or let cool = true;
+    }
+
+    console.log(cool);
+
+    //Output: Uncaught ReferenceError: cool is not defined
+    ```
+
+    ```jsx
+    if(1 === 1){
+    	var cool = true;
+    }
+
+    console.log(cool);
+
+    //Output: true - var varibales leak outside the block
+    ```
+
+    A set of curly brackets are referred to as a block.
+
+    To access a variable outside a block, we use:
+
+    ```jsx
+    let cool;
+    if(1 === 1){
+    	cool = true;
+    }
+
+    console.log(cool);
+
+    //Output: true
+    ```
+
+    Above the `cool` variable is declared in the higher scope, here global scope.
+
+    `var` variables are *function scoped*. Let's see here:
+
+    ```jsx
+    function isCool(name) {
+      if (name === 'wes') {
+        var cool = true;
+      }
+      console.log(cool);
+      return cool;
+    }
+
+    isCool('wes');
+
+    //Output: true
+    ```
+
+    Above, as the variable `cool` was declared using `var` keyword, it was not limited within the `if` block, rather it was available inside the entire `isCool` function.
+
+    `let` and `const` variables are *block scoped.*
+
+    Example:
+
+    ```jsx
+    const dog = "snickers";
+
+    function logDog() {
+      console.log(dog);
+    }
+
+    function go() {
+      const dog = "sunny";
+      logDog();
+    }
+
+    go();
+
+    // Output: snickers
+    ```
+
+    Above happens as JavaScript uses *Lexical Scoping* or *Static Scoping.* It means, *variable lookup or scope lookup happens where the functions are defined not where they are run.*
+
+    In the above example, `logDog` function is defined above where there is no `dog` variable inside its definition, so it goes and looks in upper/higher scope to find value as 'snickers'. It doesn't care where it is run, in this case inside `go` function.
+
+    ```jsx
+    const dog = "snickers";
+
+    function logDog(dog) {
+      console.log(dog);
+    }
+
+    function go() {
+      const dog = "sunny";
+      logDog("Rufus");
+    }
+
+    go();
+
+    //Output : Rufus
+    ```
+
+    The above is the output because here the function `logDog` creates a local variable for parameter `dog` which has value 'Rufus' passed to it. So, 'Rufus' is printed.
+
+     **Best practices for variables:**
+
+    - Try not to create global variables.
+
+    **Function Scoping:**
+
+    Functions are scoped the exact same way as variables.
+
+    ```jsx
+    function sayHi(name) {
+     function yell() {
+      console.log(name.toUpperCase());
+    	}
+    }
+    yell();
+
+    // Output: Uncaught ReferenceError: yell is not defined
+    ```
+
+    Just like variables, functions are scoped to the parent function. So `yell` function above is only accessible inside `sayHi` function, and not outside it.
 
 
 [1]: https://stackoverflow.com/questions/11901427/an-example-of-variable-shadowing-in-javascript
