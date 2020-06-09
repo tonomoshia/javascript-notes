@@ -28,6 +28,8 @@ We can interact with the DOM like listening for clicks, add/remove elements from
 - gives info about the browser and the device that it's on
 - things like webcam, audio access, battery level, GPS and other device specific features live on navigator.
 
+![DOM](1200px-DOM-model.svg.png)
+
 ## The DOM: Selecting elements on the page
 
 **Where to load JavaScript if we are selecting elements on the page?**
